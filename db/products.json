@@ -1,0 +1,227 @@
+[
+   {
+      "id": 1,
+      "type": "Snake Plant",
+      "desc": "A monthly dose of fertiliser in spring and summer will encourage healthy new growth.",
+      "name": "Combo trà sữa 1",
+      "image": "./images/product/1.png",
+      "price": 65000
+   },
+
+   {
+      "id": 2,
+      "type": "Snake Plant",
+      "desc": "If you notice any stems are looking a bit sad, she’s really easy to prune. Just use clean scissors to cut her back and you’ll encourage healthy new growth.",
+      "name": "Combo trà sữa 2",
+      "image": "./images/product/2.png",
+      "price": 100000
+   },
+
+   {
+      "id": 3,
+      "type": "Rubben Plant",
+      "desc": "He’ll enjoy some time outdoors at the height of summer, but introduce him to the outside gradually, so he can adjust to the stronger sun.",
+      "name": "Combo trà sữa 3",
+      "image": "./images/product/3.png",
+      "price": 700000
+   },
+
+   {
+      "id": 4,
+      "type": "Snake Plant",
+      "desc": "Susie is a superb plant for the bedroom because she stores oxygen during the day, then releases it all at night.",
+      "name": "Combo trà sữa 4",
+      "image": "./images/product/4.png",
+      "price": 440000
+   },
+
+   {
+      "id": 5,
+      "type": "Rubben Plant",
+      "desc": "If he’s growing well and you want him to keep getting bigger, consider repotting him every couple of years. Check our guide to repotting.",
+      "name": "Combo trà sữa 5",
+      "image": "./images/product/5.png",
+      "price": 333000
+   },
+
+   {
+      "id": 6,
+      "type": "Rubben Plant",
+      "desc": "Keep her looking her shiny best by giving her leaves a gentle wipe with a soft cloth every now and again. Not often; just when she's looking dusty.",
+      "name": "Combo trà sữa 6",
+      "image": "./images/product/6.png",
+      "price": 335000
+   },
+
+   {
+      "id": 7,
+      "type": "Rubben Plant",
+      "desc": "She’s naturally a slow grower but if you want to give her a boost in spring and summer, give her a feed about once a month.",
+      "name": "Combo trà sữa 7",
+      "image": "./images/product/7.png",
+      "price": 225000
+   },
+
+   {
+      "id": 8,
+      "type": "Rubben Plant",
+      "desc": "If he’s growing well and you want him to keep getting bigger, consider repotting him every couple of years. Check our guide to repotting.",
+      "name": "Combo trà sữa 8",
+      "image": "./images/product/8.png",
+      "price": 115000
+   },
+
+   {
+      "id": 9,
+      "type": "Snake Plant",
+      "desc": "We donate $1 per Pippa sold to icanyoucantoo, a grassroots initiative that supports young people from non-privileged communities achieve their career dreams.",
+      "name": "Combo trà sữa 9",
+      "image": "./images/product/9.png",
+      "price": 21000
+   },
+
+   {
+      "id": 10,
+      "type": "Snake Plant",
+      "desc": "Those majestic leaves can get dusty. Dust make it harder for him to absorb light, so give his leaves a gentle wipe if they look grubby.",
+      "name": "Combo trà sữa 10",
+      "image": "./images/product/6.png",
+      "price": 70000
+   },
+
+   {
+      "id": 11,
+      "type": "Snake Plant",
+      "desc": "In spring and summer, give her a liquid fertiliser every month to help her make strong new growth.",
+      "name": "Combo trà sữa 11",
+      "image": "./images/product/7.png",
+      "price": 50000
+   },
+
+   {
+      "id": 12,
+      "type": "Rubben Plant",
+      "desc": "The larger Phil comes with a moss pole for support. If he outgrows it, no need to cut him back. Add another moss pole on top and let him keep growing.",
+      "name": "Combo trà sữa 12",
+      "image": "./images/product/8.png",
+      "price": 49000
+   },
+
+   {
+      "id": 13,
+      "type": "Snake Plant",
+      "desc": "Penny grows toward the light. It’s not essential, but you can keep her growing nice and evenly (rather than all on one side) by rotating her pot every few days.",
+      "name": "Combo trà sữa 13",
+      "image": "./images/product/9.png",
+      "price": 65000
+   },
+
+   {
+      "id": 14,
+      "type": "Rubben Plant",
+      "desc": "If he’s growing well and you want him to keep getting bigger, consider repotting him every couple of years. Check our guide to repotting.",
+      "name": "Combo trà sữa 14",
+      "image": "./images/product/5.png",
+      "price": 1650000
+   },
+
+   {
+      "id": 15,
+      "type": "Rubben Plant",
+      "desc": "If you notice dust building up on those lovely leaves, gently wipe it off. It will keep his pores clean and let his leaves breathe freely.",
+      "name": "Combo trà sữa 15",
+      "image": "./images/product/4.png",
+      "price": 965000
+   },
+
+   {
+      "id": 16,
+      "type": "Snake Plant",
+      "desc": "If you notice dust building up on those lovely leaves, gently wipe it off. It will keep his pores clean and let his leaves breathe freely.",
+      "name": "Combo trà sữa 16",
+      "image": "./images/product/3.png",
+      "price": 865000
+   },
+
+   {
+      "id": 17,
+      "type": "Rubben Plant",
+      "desc": "Really, there’s no extra care needed for this guy, but he’ll appreciate you keeping his leaves free of dust by wiping them occasionally with a soft cloth.",
+      "name": "Combo trà sữa 17",
+      "image": "./images/product/2.png",
+      "price": 765000
+   },
+
+   {
+      "id": 18,
+      "type": "Snake Plant",
+      "desc": "You can keep him extra happy by wiping his leaves whenever they get a bit dusty. It helps him breathe more easily.",
+      "name": "Combo trà sữa 18",
+      "image": "./images/product/1.png",
+      "price": 665000
+   },
+
+   {
+      "id": 19,
+      "type": "Snake Plant",
+      "desc": "A healthy plant will develop little plantlets on long stems. You can pinch these off and put them in compost to easily create new plants.",
+      "name": "Combo trà sữa 19",
+      "image": "./images/product/9.png",
+      "price": 555000
+   },
+
+   {
+      "id": 20,
+      "type": "Snake Plant",
+      "desc": "His leaves can get dusty, which isn’t good for his health. Give him a gentle clean when needed.",
+      "name": "Combo trà sữa 20",
+      "image": "./images/product/8.png",
+      "price": 549000
+   },
+
+   {
+      "id": 21,
+      "type": "Snake Plant",
+      "desc": "If you notice her getting ‘leggy’ (long stems with few leaves), don’t be afraid to prune any sad growth with a pair of clean secateurs.",
+      "name": "Combo trà sữa 21",
+      "image": "./images/product/7.png",
+      "price": 149000
+   },
+
+   {
+      "id": 22,
+      "type": "Snake Plant",
+      "desc": "If their stems start to get a bit long pinch out the longest ones and they’ll keep their bushy shape.",
+      "name": "Combo trà sữa 22",
+      "image": "./images/product/6.png",
+      "price": 239000
+   },
+
+   {
+      "id": 23,
+      "type": "Rubben Plant",
+      "desc": "Check your window for drafts. In winter, cold drafts can upset your plants so you may want to move them somewhere warmer.",
+      "name": "Combo trà sữa 23",
+      "image": "./images/product/5.png",
+      "price": 60000
+   },
+
+   {
+      "id": 24,
+      "type": "Rubben Plant",
+      "desc": "Keep those leaves shiny by giving them an occasional gentle wipe with a cloth. Dana don’t do dust.",
+      "name": "Combo trà sữa 24",
+      "image": "./images/product/4.png",
+      "price": 169000
+   },
+
+   {
+      "id": 25,
+      "type": "Snake Plant",
+      "desc": "She’s a very fast grower. Great if you want long stems, but don’t be afraid to cut them back if you’d like to keep them shorter.",
+      "name": "Combo trà sữa 25",
+      "image": "./images/product/3.png",
+      "price": 119000
+   }
+
+]
