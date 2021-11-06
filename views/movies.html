@@ -1,0 +1,103 @@
+<div class="movies-box-user" style="padding-top: 80px;">
+    <!-- filter  -->
+    <div class="movies-filter">
+
+        <!-- language filter -->
+        <div class="filter-box">
+            <!-- <label for="language">Language</label> -->
+            <div class="select">
+                <select name="language" ng-model="valueLanguage" ng-change="filterLanguage()">
+                    <option value='' disabled>Language</option>
+                    <option ng-repeat="x in languages" value='{{x}}'>
+                        {{x == 'en'?'English':'Korean'}}
+                    </option>
+                </select>
+                <span class="custom-arrow"></span>
+            </div>
+        </div>
+
+        <!-- month filter -->
+        <div class="filter-box">
+            <!-- <label for="month">Month</label> -->
+            <div class="select">
+                <select name="month" ng-model="valueMonth" ng-change="filterMonth()">
+                    <option value='' disabled>Month</option>
+                    <option ng-repeat="i in range(1,12)" value='{{i}}'>
+                        {{i}}
+                    </option>
+                </select>
+                <span class="custom-arrow"></span>
+            </div>
+        </div>
+
+        <!-- year filter -->
+        <!-- <div class="filter-box">
+            <label for="year">Year</label>
+            <div class="select">
+                <select name="year" ng-model="valueYear">
+                    <option selected>Year</option>
+                    <option ng-repeat="x in years" value='{{x}}'>
+                        {{x}}
+                    </option>
+                </select>
+                <span class="custom-arrow"></span>
+            </div>
+        </div> -->
+
+        <div class="filter-box">
+            <!-- <label for="btn" style="visibility:hidden;">!</label> -->
+            <div>
+                <button name="btn" class="filterBtn" ng-click="reset()">Reset</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- sort  -->
+    <div class="movies-sort">
+        <div class="filter-box">
+            <button type="button" class="btn btn-info sortBtn" ng-click="order('name')">Name</button>
+            <button type="button" class="btn btn-info sortBtn" ng-click="order('vote_average')">Vote</button>
+        </div>
+    </div>
+
+    <!-- search  -->
+    <div class="search2">
+        <input type="text" ng-model="searchInput" ng-change="filterInput()" placeholder="Find your movie">
+        <!-- search icon  -->
+        <i class="fas fa-search"></i>
+    </div>
+</div>
+
+<!-- movies list  -->
+<section id="movies-list">
+
+    <div class="movies-box" 
+        ng-repeat="m in moviesArr |
+            orderBy: sortValue | 
+            filter: {
+                name : userInputValue,
+                media_type: filterValueMedia, 
+                original_language : filterValueLanguage, 
+            } | 
+            limitTo: pageSize: startIndex"
+    >
+        <!-- img  -->
+        <div class="movies-img">
+            <div class="quality">{{m.media_type}}</div>
+            <img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2{{m.poster_path}}" alt="">      
+        </div>
+        <a href="">
+            <!-- Some of the data doesnt have the name or original_title so this will fix it -->
+            {{m.name || m.original_title}}
+        </a>
+        <div class="movies-details">
+            <p>Vote: {{m.vote_average}}</p>
+            <p>Release Date: {{m.release_date || m.first_air_date | date : 'dd-MM-yyyy'}}</p>
+            <p>Language: {{m.original_language == 'en'?'English':'Korean'}}</p>
+        </div>
+        <div class="movies-btns">
+            <a>Watch Trailer</a>
+        </div>
+    </div>
+    
+</section>

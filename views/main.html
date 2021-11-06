@@ -1,0 +1,305 @@
+
+<section id="main">
+    <!-- showcase  -->
+    <!-- heading -->
+    <h1 class="showcase-heading">Showcase</h1>
+
+    <ul id="autoWidth" class="cs-hidden">
+
+        <li class="item-a">
+            <!-- showcase box  -->
+            <div class="showcase-box">
+                <img src="./images/s-1.jpg" alt="">
+            </div>
+        </li>
+        <li class="item-b">
+            <!-- showcase box  -->
+            <div class="showcase-box">
+                <img src="./images/s-2.jpg" alt="">
+            </div>
+        </li>
+        <li class="item-c">
+            <!-- showcase box  -->
+            <div class="showcase-box">
+                <img src="./images/s-3.jpg" alt="">
+            </div>
+        </li>
+        <li class="item-d">
+            <!-- showcase box  -->
+            <div class="showcase-box">
+                <img src="./images/s-4.jpg" alt="">
+            </div>
+        </li>
+        <li class="item-e">
+            <!-- showcase box  -->
+            <div class="showcase-box">
+                <img src="./images/s-5.png" alt="">
+            </div>
+        </li>
+        
+    </ul>
+</section>
+
+<!-- latest movies  -->
+<section id="latest">
+    <h2 class="latest-heading">Latest Movies</h2>
+    <!-- slider  -->
+    <ul id="autoWidth2" class="cs-hidden">
+
+        <li class="item-a">
+            <div class="latest-box">
+                <div class="latest-box-img">
+                    <img src="./images/m-1.jpg" alt="">
+                </div>
+                <div class="latest-box-text">
+                    <strong>Kin 2018</strong>
+                    <p>Action Movies</p>
+                </div>
+            </div>
+        </li>
+        <li class="item-a">
+            <div class="latest-box">
+                <div class="latest-box-img">
+                    <img src="./images/m-2.jpg" alt="">
+                </div>
+                <div class="latest-box-text">
+                    <strong>Kin 2018</strong>
+                    <p>Action Movies</p>
+                </div>
+            </div>
+        </li>
+        <li class="item-a">
+            <div class="latest-box">
+                <div class="latest-box-img">
+                    <img src="./images/m-3.jpg" alt="">
+                </div>
+                <div class="latest-box-text">
+                    <strong>Kin 2018</strong>
+                    <p>Action Movies</p>
+                </div>
+            </div>
+        </li>
+        <li class="item-a">
+            <div class="latest-box">
+                <div class="latest-box-img">
+                    <img src="./images/m-4.jpg" alt="">
+                </div>
+                <div class="latest-box-text">
+                    <strong>Kin 2018</strong>
+                    <p>Action Movies</p>
+                </div>
+            </div>
+        </li>
+        <li class="item-a">
+            <div class="latest-box">
+                <div class="latest-box-img">
+                    <img src="./images/m-5.jpg" alt="">
+                </div>
+                <div class="latest-box-text">
+                    <strong>Kin 2018</strong>
+                    <p>Action Movies</p>
+                </div>
+            </div>
+        </li>
+        <li class="item-a">
+            <div class="latest-box">
+                <div class="latest-box-img">
+                    <img src="./images/m-6.jpg" alt="">
+                </div>
+                <div class="latest-box-text">
+                    <strong>Kin 2018</strong>
+                    <p>Action Movies</p>
+                </div>
+            </div>
+        </li>
+        <li class="item-a">
+            <div class="latest-box">
+                <div class="latest-box-img">
+                    <img src="./images/m-7.jpeg" alt="">
+                </div>
+                <div class="latest-box-text">
+                    <strong>Kin 2018</strong>
+                    <p>Action Movies</p>
+                </div>
+            </div>
+        </li>
+        <li class="item-a">
+            <div class="latest-box">
+                <div class="latest-box-img">
+                    <img src="./images/m-7.jpeg" alt="">
+                </div>
+                <div class="latest-box-text">
+                    <strong>Kin 2018</strong>
+                    <p>Action Movies</p>
+                </div>
+            </div>
+        </li>
+        <li class="item-a">
+            <div class="latest-box">
+                <div class="latest-box-img">
+                    <img src="./images/m-7.jpeg" alt="">
+                </div>
+                <div class="latest-box-text">
+                    <strong>Kin 2018</strong>
+                    <p>Action Movies</p>
+                </div>
+            </div>
+        </li>
+
+      </ul>
+</section>
+
+<!-- movies  -->
+
+<!-- heading  -->
+<div class="movies-heading">
+    <h1>Latest Movies</h1>
+</div>
+
+<!-- filter  -->
+
+<div class="movies-box-user">
+    <!-- filter  -->
+    <div class="movies-filter">
+
+        <!-- media filter -->
+        <div class="filter-box">
+            <!-- <label for="media">Media Type</label> -->
+            <div class="select">
+                <select class="capitalize" name="media" ng-model="valueMedia" ng-change="filterMedia()">
+                    <option value='' disabled>Media</option>
+                    <option ng-repeat="x in medias" value='{{x}}'>
+                        {{x}}
+                    </option>
+                </select>
+                <span class="custom-arrow"></span>
+            </div>
+        </div>
+
+        <!-- language filter -->
+        <div class="filter-box">
+            <!-- <label for="language">Language</label> -->
+            <div class="select">
+                <select name="language" ng-model="valueLanguage" ng-change="filterLanguage()">
+                    <option value='' disabled>Language</option>
+                    <option ng-repeat="x in languages" value='{{x}}'>
+                        {{x == 'en'?'English':'Korean'}}
+                    </option>
+                </select>
+                <span class="custom-arrow"></span>
+            </div>
+        </div>
+
+        <!-- month filter -->
+        <div class="filter-box">
+            <!-- <label for="month">Month</label> -->
+            <div class="select">
+                <select name="month" ng-model="valueMonth" ng-change="filterMonth()">
+                    <option value='' disabled>Month</option>
+                    <option ng-repeat="i in range(1,12)" value='{{i}}'>
+                        {{i}}
+                    </option>
+                </select>
+                <span class="custom-arrow"></span>
+            </div>
+        </div>
+
+        <!-- year filter -->
+        <!-- <div class="filter-box">
+            <label for="year">Year</label>
+            <div class="select">
+                <select name="year" ng-model="valueYear">
+                    <option selected>Year</option>
+                    <option ng-repeat="x in years" value='{{x}}'>
+                        {{x}}
+                    </option>
+                </select>
+                <span class="custom-arrow"></span>
+            </div>
+        </div> -->
+
+        <div class="filter-box">
+            <!-- <label for="btn" style="visibility:hidden;">!</label> -->
+            <div>
+                <button name="btn" class="filterBtn" ng-click="reset()">Reset</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- sort  -->
+    <div class="movies-sort">
+        <div class="filter-box">
+            <button type="button" class="btn btn-info sortBtn" ng-click="order('name')">Name</button>
+            <button type="button" class="btn btn-info sortBtn" ng-click="order('vote_average')">Vote</button>
+        </div>
+    </div>
+
+    <!-- search  -->
+    <div class="search2">
+        <input type="text" ng-model="searchInput" ng-change="filterInput()" placeholder="Find your movie">
+        <!-- search icon  -->
+        <i class="fas fa-search"></i>
+    </div>
+</div>
+
+<!-- movies list  -->
+<section id="movies-list">
+
+    <div class="movies-box" 
+        ng-repeat="m in moviesArr |
+            orderBy: sortValue | 
+            filter: {
+                name : userInputValue,
+                media_type: filterValueMedia, 
+                original_language : filterValueLanguage, 
+            } | 
+            limitTo: pageSize: startIndex"
+    >
+        <!-- img  -->
+        <div class="movies-img">
+            <div class="quality">{{m.media_type}}</div>
+            <img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2{{m.poster_path}}" alt="">      
+        </div>
+        <a href="">
+            <!-- Some of the data doesnt have the name or original_title so this will fix it -->
+            {{m.name || m.original_title}}
+        </a>
+        <div class="movies-details">
+            <p>Vote: {{m.vote_average}}</p>
+            <p>Release Date: {{m.release_date || m.first_air_date | date : 'dd-MM-yyyy'}}</p>
+            <p>Language: {{m.original_language == 'en'?'English':'Korean'}}</p>
+        </div>
+        <div class="movies-btns">
+            <a>Watch Trailer</a>
+        </div>
+    </div>
+    
+</section>
+
+<!-- buttons  -->
+<div class="btns" id="btns">
+    <a ng-class="{disabled2 : currentPage == 1}" ng-click="first()">First</a>
+    <a ng-class="{disabled2 : currentPage == 1}" ng-click="previous()">Previous</a>
+    
+    <a 
+        ng-repeat="i in range(1, pageCount)" 
+        ng-click="goToPage(i)" 
+        ng-class="{active2: currentPage == i}"
+    >{{i}}</a>
+
+    <a ng-class="{disabled2 : currentPage == pageCount}" ng-click="next()">Next</a>
+    <a ng-class="{disabled2 : currentPage == pageCount}" ng-click="last()">Last</a>
+</div>
+
+<script>
+        // slide script
+        $(document).ready(function() {
+            $('#autoWidth, #autoWidth2').lightSlider({
+                autoWidth:true,
+                loop:true,
+                onSliderLoad: function() {
+                    $('#autoWidth, #autoWidth2').removeClass('cS-hidden');
+                } 
+            });  
+        });
+</script>
