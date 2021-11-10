@@ -8,8 +8,8 @@
             <div class="select">
                 <select name="language" ng-model="valueLanguage" ng-change="filterLanguage()">
                     <option value='' disabled>Language</option>
-                    <option ng-repeat="x in languages" value='{{x}}'>
-                        {{x == 'en'?'English':'Korean'}}
+                    <option ng-repeat="x in currentLanguages" value='{{x.iso_639_1}}'>
+                        {{x.english_name}}
                     </option>
                 </select>
                 <span class="custom-arrow"></span>
@@ -68,6 +68,10 @@
     </div>
 </div>
 
+<div class="movies-heading">
+    <h1>Discover New Movies</h1>
+</div>
+
 <!-- movies list  -->
 <section id="movies-list">
 
@@ -75,29 +79,49 @@
         ng-repeat="m in moviesArr |
             orderBy: sortValue | 
             filter: {
-                name : userInputValue,
+                title : userInputValue,
                 media_type: filterValueMedia, 
                 original_language : filterValueLanguage, 
             } | 
-            limitTo: pageSize: startIndex"
+            limitTo: pageSize: startIndex
+        "
     >
         <!-- img  -->
         <div class="movies-img">
-            <div class="quality">{{m.media_type}}</div>
             <img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2{{m.poster_path}}" alt="">      
         </div>
-        <a href="">
-            <!-- Some of the data doesnt have the name or original_title so this will fix it -->
-            {{m.name || m.original_title}}
-        </a>
-        <div class="movies-details">
-            <p>Vote: {{m.vote_average}}</p>
-            <p>Release Date: {{m.release_date || m.first_air_date | date : 'dd-MM-yyyy'}}</p>
-            <p>Language: {{m.original_language == 'en'?'English':'Korean'}}</p>
-        </div>
-        <div class="movies-btns">
-            <a>Watch Trailer</a>
+        <div class="movies-details-box">
+            <a href="">
+                <!-- Some of the data doesnt have the name or original_title so this will fix it -->
+                {{m.title}}
+            </a>
+            <div class="movies-details">
+                <p>Vote: {{m.vote_average}}</p>
+                <p>Release Date: {{m.release_date || m.first_air_date | date : 'dd-MM-yyyy'}}</p>
+                <p>Language: <span class="capitalize">{{m.english_name}}</span></p>
+            </div>
+            <div class="movies-btns">
+                <a ng-click="openModal(m.id, m.title)">Watch Trailer</a>
+            </div>
         </div>
     </div>
     
 </section>
+
+<div class="btns-scroll">
+    <a ng-click="topFunc()">
+        <i class="fas fa-caret-up fa-3x"></i>
+    </a>
+    <a ng-click="fetchPreviousPage()" ng-class="{disabled2 : currentPage == 1}">
+        <i class="fas fa-caret-left fa-3x"></i>
+    </a>
+    <a ng-click="fetchNextPage()">
+        <i class="fas fa-caret-right fa-3x"></i>
+    </a>
+</div>
+
+<div class="btns" id="btns">
+    <a ng-click="fetchPreviousPage()" ng-class="{disabled2 : currentPage == 1}">Previous</a>
+    <a>{{currentPage}}</a>
+    <a ng-click="fetchNextPage()">Next</a>
+</div>
