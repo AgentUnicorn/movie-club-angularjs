@@ -48,10 +48,8 @@ app.controller("mainCtrl", function ($scope, $http, $rootScope, $filter, $sce) {
     }).then(function successCallback(response) {
         //Lấy về 1 mảng chứa tất cả ngôn ngừ từ database
         $scope.langArray = response.data;
-        console.log($scope.shortLang);
         //So sánh với mảng shortLang để lấy ra các object chứa thông tin của ngôn ngữ
         $scope.currentLanguages = $scope.shortLang.map(item => $scope.langArray.find(lang => lang.iso_639_1 == item))
-        console.log($scope.currentLanguages);
         //Merge mảng chính với mảng chứa thông tin ngôn ngữ
         $scope.finalArr = merged($scope.movies,$scope.currentLanguages);
         $scope.moviesArr = $scope.finalArr;

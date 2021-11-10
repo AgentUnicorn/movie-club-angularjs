@@ -360,8 +360,7 @@ select {
     object-fit: cover;
 }
 
-.movies-box a {
-    text-align: center;
+.movies-box > .movies-details-box > a {
     display: block;
     font-weight: 600;
     /* font-size: 20px; */
@@ -370,7 +369,14 @@ select {
     overflow: hidden;
     text-overflow: ellipsis;
     color: #3a3a3a;
-    margin: 20px 20px 0px;
+    margin: 20px 0px;
+    text-align: center;
+}
+
+.movies-details-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .movies-details {
@@ -386,7 +392,7 @@ select {
 .movies-btns {
     /* border: 1px solid red; */
     width: 65%;
-    margin: 0 auto;
+    margin: 0 auto 20px;
 }
 
 .movies-btns a {
@@ -398,6 +404,7 @@ select {
     text-transform: capitalize;
     font-weight: 500;
     font-size: 1rem;
+    text-align: center;
     margin: 0px auto 20px;
 }
 
@@ -612,11 +619,21 @@ nav .menu-btn, nav .menu-icon {
         width: 65%;
     }
     .movies-img img {
-        width: 100%;
+        width: 90%;
         height: 100%;
     }
     .movies-btns a {
         margin: 0px auto;
+    }
+    .movies-details-box {
+        justify-content: center;
+        align-items: center;
+        border: 1px solid blue;
+        width: 100%;
+    }
+    .movies-details-box > a {
+        display: flex;
+        justify-content: center;
     }
     .movies-filter {
         flex-direction: column;

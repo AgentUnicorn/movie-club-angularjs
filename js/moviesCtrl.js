@@ -13,7 +13,6 @@ app.controller("moviesCtrl", function ($scope, $http, $rootScope, $filter, $sce)
             url: url+page
         }).then(function successCallback(response) {
             $scope.movies = response.data.results;
-
             //Lọc ra 1 mảng chứa tất cả ngôn ngữ từ data mà server trả về
             let test = [...$scope.movies];
             let result = test.map(a => a.original_language);
@@ -25,7 +24,6 @@ app.controller("moviesCtrl", function ($scope, $http, $rootScope, $filter, $sce)
         });
     }
     getMovies();
-
     //Hàm merge 2 array object dựa theo 2 key khác nhau có cùng value 
     function merged(array, mergedArray) {
         let result = [];
@@ -38,23 +36,24 @@ app.controller("moviesCtrl", function ($scope, $http, $rootScope, $filter, $sce)
         return result;
     }
     
-    $http({
-        method: 'GET',
-        url: `https://api.themoviedb.org/3/configuration/languages?api_key=${$rootScope.API_KEY}`
-    }).then(function successCallback(response) {
-        //Lấy về 1 mảng chứa tất cả ngôn ngừ từ database
-        $scope.langArray = response.data;
-        console.log($scope.shortLang);
-        //So sánh với mảng shortLang để lấy ra các object chứa thông tin của ngôn ngữ
-        $scope.currentLanguages = $scope.shortLang.map(item => $scope.langArray.find(lang => lang.iso_639_1 == item))
-        console.log($scope.currentLanguages);
-        //Merge mảng chính với mảng chứa thông tin ngôn ngữ
-        $scope.finalArr = merged($scope.movies,$scope.currentLanguages);
-        $scope.moviesArr = $scope.finalArr;
-    }, function errorCallback(response) {
-        console.log("error")
-    });
-
+    function updateMoviesArr() {
+        $http({
+            method: 'GET',
+            url: `https://api.themoviedb.org/3/configuration/languages?api_key=${$rootScope.API_KEY}`
+        }).then(function successCallback(response) {
+            //Lấy về 1 mảng chứa tất cả ngôn ngừ từ database
+            $scope.langArray = response.data;
+            //So sánh với mảng shortLang để lấy ra các object chứa thông tin của ngôn ngữ
+            $scope.currentLanguages = $scope.shortLang.map(item => $scope.langArray.find(lang => lang.iso_639_1 == item))
+            //Merge mảng chính với mảng chứa thông tin ngôn ngữ
+            $scope.finalArr = merged($scope.movies,$scope.currentLanguages);
+            $scope.moviesArr = $scope.finalArr;
+        }, function errorCallback(response) {
+            console.log("error")
+        });
+    }
+    updateMoviesArr();
+    
     $scope.medias = ['movie', 'tv'];
 
     // FILTER BY MEDIA TYPE
@@ -137,7 +136,9 @@ app.controller("moviesCtrl", function ($scope, $http, $rootScope, $filter, $sce)
         if(angular.isDefined($scope.searchInput)){
             delete $scope.searchInput;
         }
-
+        page = 1;
+        getMovies();
+        updateMoviesArr();
         $scope.moviesArr = $scope.finalArr;
     }
 
@@ -154,6 +155,7 @@ app.controller("moviesCtrl", function ($scope, $http, $rootScope, $filter, $sce)
         page++;
         $scope.currentPage++;
         getMovies();
+        updateMoviesArr();
         //Sau khi fetch page mới sẽ nhảy lên trên đầu trang
         $scope.topFunc();
     }
@@ -164,6 +166,7 @@ app.controller("moviesCtrl", function ($scope, $http, $rootScope, $filter, $sce)
             $scope.currentPage--;
         }
         getMovies();
+        updateMoviesArr();
         //Sau khi fetch page mới sẽ nhảy lên trên đầu trang
         $scope.topFunc();
     }
