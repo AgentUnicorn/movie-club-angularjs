@@ -1,5 +1,5 @@
 // GET ALL TRENDING MOVIES 
-app.controller("moviesCtrl", function ($scope, $http, $rootScope, $filter, $sce) {
+app.controller("moviesCtrl", function ($scope, $http, $rootScope, $filter) {
     $scope.currentPage = 1;
     var page = 1;
     $scope.movies = [];

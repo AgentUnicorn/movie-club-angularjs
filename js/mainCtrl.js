@@ -4,12 +4,11 @@
 // })
 
 // GET ALL TRENDING MOVIES 
-app.controller("mainCtrl", function ($scope, $http, $rootScope, $filter, $sce) {
+app.controller("mainCtrl", function ($scope, $http, $rootScope, $filter) {
     var page = 1;
     $scope.movies = [];
     $scope.shortLang = [];
     $scope.langArray = [];
-    var isMerged = false;
     var url = `https://api.themoviedb.org/3/trending/all/day?api_key=${$rootScope.API_KEY}&page=${page}`;
     // var url = `https://api.themoviedb.org/3/discover/movie?api_key=${$rootScope.API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate`;
     // var urlDiscover = `https://api.themoviedb.org/3/discover/movie?api_key=${$rootScope.API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate`
