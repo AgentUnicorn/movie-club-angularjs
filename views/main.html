@@ -249,7 +249,7 @@
         ng-repeat="m in moviesArr |
             orderBy: sortValue | 
             filter: {
-                name : userInputValue,
+                title: userInputValue,
                 media_type: filterValueMedia, 
                 original_language : filterValueLanguage, 
             } | 
