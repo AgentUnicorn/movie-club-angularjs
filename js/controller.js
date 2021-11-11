@@ -1,4 +1,19 @@
-var app = angular.module("myApp", ["ngRoute"]);
+var app = angular.module("myApp", ["ngRoute"]); 
+
+app.config(function($routeProvider) {
+    $routeProvider
+        .when("/movies", {
+            templateUrl: "views/movies.html",
+            controller: "moviesCtrl"
+        })
+        .when("/tv", {
+            templateUrl: "views/tv.html"
+        })
+        .otherwise({
+            templateUrl: "./views/main.html",
+            controller: "mainCtrl"
+        });  
+})
 
 //SET API KEY INTO ROOT SCOPE
 app.controller("rootCtrl", function($scope, $rootScope, $http, $sce) {
