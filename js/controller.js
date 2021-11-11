@@ -1,3 +1,5 @@
+var app = angular.module("myApp", ["ngRoute"]);
+
 //SET API KEY INTO ROOT SCOPE
 app.controller("rootCtrl", function($scope, $rootScope, $http, $sce) {
     $rootScope.API_KEY = 'f752f095c87a67b8ca8b17c5e3810382';
