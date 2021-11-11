@@ -79,7 +79,6 @@
         ng-repeat="m in moviesArr |
             orderBy: sortValue | 
             filter: {
-                title : userInputValue,
                 media_type: filterValueMedia, 
                 original_language : filterValueLanguage, 
             } | 
@@ -104,6 +103,11 @@
                 <a ng-click="openModal(m.id, m.title)">Watch Trailer</a>
             </div>
         </div>
+    </div>
+
+    <div ng-show="!moviesArr.length">
+        <h2 style="text-align: center;">Please hit the <span style="color: red">RESET</span> button!!</h2>
+        <img src="../images/notfound.png" alt="">
     </div>
     
 </section>

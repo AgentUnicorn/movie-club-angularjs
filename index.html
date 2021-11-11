@@ -36,7 +36,7 @@
         <ul class="menu">
             <li><a href="#!/">Home</a></li>
             <li><a href="#!movies">Movies</a></li>
-            <li><a href="">TV Show</a></li>
+            <li><a href="#!tv">TV Show</a></li>
         </ul>
         <!-- search  -->
         <div class="search">
@@ -69,6 +69,14 @@
             $(this).find(".accent").removeClass("animate");
             $(this).find(".item").css("color","#000");
         });
+        window.onscroll = function () {
+            const mybutton = document.querySelector(".btns-scroll");
+            if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
     </script>
 </body>
 </html>

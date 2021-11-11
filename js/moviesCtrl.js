@@ -7,8 +7,8 @@ app.controller("moviesCtrl", function ($scope, $http, $rootScope, $filter, $sce)
     $scope.langArray = [];
     // var url = `https://api.themoviedb.org/3/trending/movie/day?api_key=${$rootScope.API_KEY}&page=`;
     var url = `https://api.themoviedb.org/3/discover/movie?api_key=${$rootScope.API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate&page=`;
-    function getMovies() {
-        $http({
+    async function getMovies() {
+        await $http({
             method: 'GET',
             url: url+page
         }).then(function successCallback(response) {
@@ -20,27 +20,18 @@ app.controller("moviesCtrl", function ($scope, $http, $rootScope, $filter, $sce)
             // end
 
         }, function errorCallback(response) {
-            console.log("error")
+            $.sweetModal({
+                content: 'Cannot fetch data',
+                width: '100%',
+                icon: $.sweetModal.ICON_WARNING,
+                theme: $.sweetModal.THEME_DARK
+            });
         });
     }
     getMovies();
-    //Hàm merge 2 array object dựa theo 2 key khác nhau có cùng value 
-    function merged(array, mergedArray) {
-        console.log(array);
-        console.log(mergedArray);
-        let result = [];
-        for(let i=0; i<array.length; i++) {
-            result.push({
-                ...array[i], 
-                ...(mergedArray.find((itm) => itm.iso_639_1 === array[i].original_language))
-            });
-        }
-        console.log(result);
-        return result;
-    }
     
-    function updateMoviesArr() {
-        $http({
+    async function getLangArr(mergedArray) {
+        await $http({
             method: 'GET',
             url: `https://api.themoviedb.org/3/configuration/languages?api_key=${$rootScope.API_KEY}`
         }).then(function successCallback(response) {
@@ -49,25 +40,57 @@ app.controller("moviesCtrl", function ($scope, $http, $rootScope, $filter, $sce)
             //So sánh với mảng shortLang để lấy ra các object chứa thông tin của ngôn ngữ
             $scope.currentLanguages = $scope.shortLang.map(item => $scope.langArray.find(lang => lang.iso_639_1 == item))
             //Merge mảng chính với mảng chứa thông tin ngôn ngữ
-            $scope.finalArr = merged($scope.movies,$scope.currentLanguages);
-            $scope.moviesArr = $scope.finalArr;
+            if(mergedArray) {
+                $scope.finalArr = $rootScope.merged(mergedArray,$scope.currentLanguages);
+                $scope.moviesArr = $scope.finalArr;
+            } else {
+                $scope.finalArr = $rootScope.merged($scope.movies,$scope.currentLanguages);
+                $scope.moviesArr = $scope.finalArr;
+            }
         }, function errorCallback(response) {
-            console.log("error")
+            $.sweetModal({
+                content: 'Cannot fetch data',
+                width: '100%',
+                icon: $.sweetModal.ICON_WARNING,
+                theme: $.sweetModal.THEME_DARK
+            });
         });
     }
-    updateMoviesArr();
+    getLangArr();
+
+    $scope.userInputValue = [];
+    $scope.search = false;
+    function searchMovies(queryInput, page) {
+        console.log(page)
+        var url = `https://api.themoviedb.org/3/search/movie?api_key=${$rootScope.API_KEY}&query=${queryInput}&page=${page}`
+        $http({
+            method: 'GET',
+            url: url
+        }).then(function successCallback(response) {
+            $scope.userInputValue = response.data.results;
+
+            //Lọc ra 1 mảng chứa tất cả ngôn ngữ từ data mà server trả về
+            let test = [...$scope.userInputValue];
+            let result = test.map(a => a.original_language);
+            $scope.shortLang = [...new Set(result)];
+            console.log($scope.shortLang);
+            // end
+
+        }, function errorCallback(response) {
+            $.sweetModal({
+                content: 'Cannot fetch data',
+                width: '100%',
+                icon: $.sweetModal.ICON_WARNING,
+                theme: $.sweetModal.THEME_DARK
+            });
+        });
+    }
     
     $scope.medias = ['movie', 'tv'];
 
     // FILTER BY MEDIA TYPE
     $scope.filterValueLanguage = '';
     $scope.filterValueMonth = '';
-
-    // $scope.status = true;
-    // $scope.removeDisabled = function() {
-    //     $scope.status = false;
-    //     console.log($scope.status);
-    // }
 
     // GET VALUE FROM SELECT THEN START FILTER
     $scope.filterLanguage = function() {
@@ -78,12 +101,15 @@ app.controller("moviesCtrl", function ($scope, $http, $rootScope, $filter, $sce)
 
     $scope.filterMonth = function () {
         if($scope.valueMonth || $scope.valueMonth != '') {
+
             $scope.filterValueMonth = $scope.valueMonth;
             if($scope.valueMonth < 10) {
                 $scope.filterValueMonth = '0'+$scope.valueMonth;
             }
             $scope.testFunc = function() {
-                $scope.result = $filter('FilterByMonth')($scope.finalArr, $scope.filterValueMonth);
+                console.log($scope.moviesArr);
+                $scope.result = $filter('FilterByMonth')($scope.moviesArr, $scope.filterValueMonth);
+                console.log($scope.result);
                 return $scope.result;
             }
             $scope.moviesArr = $scope.testFunc();
@@ -109,8 +135,16 @@ app.controller("moviesCtrl", function ($scope, $http, $rootScope, $filter, $sce)
         // incase user delete all input
         if(angular.isDefined($scope.userInputValue) && $scope.searchInput.length == 0){
             delete $scope.userInputValue;
+            $scope.search = false;
+            page = 1;
+            $scope.currentPage = 1;
+            getMovies();
+            getLangArr();
         } else {
-            $scope.userInputValue = $scope.searchInput;
+            $scope.search = true;
+            searchMovies($scope.searchInput, page);
+            getLangArr($scope.userInputValue);
+            // $scope.moviesArr = $scope.userInputValue;
         }
     }
 
@@ -127,6 +161,7 @@ app.controller("moviesCtrl", function ($scope, $http, $rootScope, $filter, $sce)
         //delete month
         if(angular.isDefined($scope.valueMonth)){
             delete $scope.valueMonth;
+            
         }
         if(angular.isDefined($scope.filterValueMonth)){
             delete $scope.filterValueMonth;
@@ -135,13 +170,23 @@ app.controller("moviesCtrl", function ($scope, $http, $rootScope, $filter, $sce)
         //delete searchbar
         if(angular.isDefined($scope.userInputValue)){
             delete $scope.userInputValue;
+            $scope.search = false;
+            page = 1;
+            $scope.currentPage = 1;
+            getMovies();
+            getLangArr()
         }
         if(angular.isDefined($scope.searchInput)){
             delete $scope.searchInput;
         }
+        //reset order 
+        $scope.sortValue = 'name';
+
+        //back to page 1 and update 
         page = 1;
+        $scope.currentPage = 1;
         getMovies();
-        updateMoviesArr();
+        getLangArr();
         $scope.moviesArr = $scope.finalArr;
     }
 
@@ -154,74 +199,50 @@ app.controller("moviesCtrl", function ($scope, $http, $rootScope, $filter, $sce)
         return input;
     }
 
+    //PAGINATION (WITH API)
     $scope.fetchNextPage = function() {
-        page++;
-        $scope.currentPage++;
-        getMovies();
-        updateMoviesArr();
-        //Sau khi fetch page mới sẽ nhảy lên trên đầu trang
-        $scope.topFunc();
+        if($scope.search && $scope.searchInput.length != 0) {
+            page++;
+            $scope.currentPage++;
+            searchMovies($scope.searchInput,page);
+            getLangArr($scope.userInputValue);
+            //Sau khi fetch page mới sẽ nhảy lên trên đầu trang
+            $scope.topFunc();
+        } else {
+            page++;
+            $scope.currentPage++;
+            getMovies();
+            getLangArr();
+            //Sau khi fetch page mới sẽ nhảy lên trên đầu trang
+            $scope.topFunc();
+        }
     }
 
     $scope.fetchPreviousPage = function() {
         if(page > 1) {
-            page--;
-            $scope.currentPage--;
-        }
-        getMovies();
-        updateMoviesArr();
-        //Sau khi fetch page mới sẽ nhảy lên trên đầu trang
-        $scope.topFunc();
-    }
-
-    $scope.topFunc = function() {
-        document.body.scrollTop = 0; // For Safari
-        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-    }
-
-    $scope.openModal = function(videoId, videoName) {
-        let url = `https://api.themoviedb.org/3/movie/${videoId}/videos?api_key=${$rootScope.API_KEY}&language=en-US`
-        $scope.video = [];
-        $scope.videoYTid = '';
-        $http({
-            method: 'GET',
-            url: url
-        }).then(function successCallback(response) {
-            $scope.video = response.data.results;
-            if($scope.video[0] === undefined) {
-                $.sweetModal({
-                    content: 'Video cannot be found',
-                    width: '100%',
-                    icon: $.sweetModal.ICON_WARNING,
-                    theme: $.sweetModal.THEME_DARK
-                });
+            if($scope.search && $scope.searchInput.length != 0) {
+                page--;
+                $scope.currentPage--;
+                searchMovies($scope.searchInput,page);
+                getLangArr($scope.userInputValue);
+                //Sau khi fetch page mới sẽ nhảy lên trên đầu trang
+                $scope.topFunc();
             } else {
-                let videoYTid = $scope.video[0].key;
-                var embedUrl = `https://www.youtube.com/embed/${videoYTid}?autoplay=1`;
-                var trustUrl = $sce.trustAsResourceUrl(embedUrl);
-                $.sweetModal({
-                    title: videoName,
-                    width: '100%',
-                    content: `<iframe width="100%" height="500" src="${trustUrl}" title="${videoName}" frameborder="0" allowfullscreen></iframe>
-                    `,
-                    theme: $.sweetModal.THEME_DARK
-                });
+                page--;
+                $scope.currentPage--;
+                getMovies();
+                getLangArr();
+                //Sau khi fetch page mới sẽ nhảy lên trên đầu trang
+                $scope.topFunc();
             }
-        }, function errorCallback(error) {
-            if(error.status == 404) {
-                $.sweetModal({
-                    content: 'Video cannot be found',
-                    width: '100%',
-                    icon: $.sweetModal.ICON_WARNING,
-                    theme: $.sweetModal.THEME_DARK
-                });
-            }
-        })
+        }
     }
+
 })
 
 app.filter('FilterByMonth', function () {
     return function (items, month) {
+        console.log(items)
         var filtered = [];
         for(var i = 0; i < items.length; i++) {
             var item = items[i];

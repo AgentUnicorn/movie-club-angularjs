@@ -492,6 +492,7 @@ nav .menu-btn, nav .menu-icon {
 }
 
 .btns-scroll {
+    display: none;
     position: fixed; 
     right: 0; 
     bottom: 5%; 

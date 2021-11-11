@@ -27,20 +27,13 @@ app.controller("mainCtrl", function ($scope, $http, $rootScope, $filter, $sce) {
         // end
 
     }, function errorCallback(response) {
-        console.log("error")
+        $.sweetModal({
+            content: 'Cannot fetch data',
+            width: '100%',
+            icon: $.sweetModal.ICON_WARNING,
+            theme: $.sweetModal.THEME_DARK
+        });
     })
-
-    //Hàm merge 2 array object dựa theo 2 key khác nhau có cùng value 
-    function merged(array, mergedArray) {
-        let result = [];
-        for(let i=0; i<array.length; i++) {
-            result.push({
-                ...array[i], 
-                ...(mergedArray.find((itm) => itm.iso_639_1 === array[i].original_language))
-            });
-        }
-        return result;
-    }
 
     $http({
         method: 'GET',
@@ -51,10 +44,15 @@ app.controller("mainCtrl", function ($scope, $http, $rootScope, $filter, $sce) {
         //So sánh với mảng shortLang để lấy ra các object chứa thông tin của ngôn ngữ
         $scope.currentLanguages = $scope.shortLang.map(item => $scope.langArray.find(lang => lang.iso_639_1 == item))
         //Merge mảng chính với mảng chứa thông tin ngôn ngữ
-        $scope.finalArr = merged($scope.movies,$scope.currentLanguages);
+        $scope.finalArr = $rootScope.merged($scope.movies,$scope.currentLanguages);
         $scope.moviesArr = $scope.finalArr;
     }, function errorCallback(response) {
-        console.log("error")
+        $.sweetModal({
+            content: 'Cannot fetch data',
+            width: '100%',
+            icon: $.sweetModal.ICON_WARNING,
+            theme: $.sweetModal.THEME_DARK
+        });
     });
 
     $scope.medias = ['movie', 'tv'];
@@ -160,7 +158,6 @@ app.controller("mainCtrl", function ($scope, $http, $rootScope, $filter, $sce) {
         if(angular.isDefined($scope.searchInput)){
             delete $scope.searchInput;
         }
-        isMerged = false;
         $scope.moviesArr = $scope.finalArr;
         $scope.first();
     }
@@ -206,62 +203,6 @@ app.controller("mainCtrl", function ($scope, $http, $rootScope, $filter, $sce) {
     $scope.goToPage = function(pageNum) {
         $scope.startIndex = ($scope.pageSize*pageNum) - $scope.pageSize;
         $scope.currentPage = pageNum;
-    }
-
-    // $scope.topScroll = true;
-    // var checkTop = function() {
-    //     if(document.body.scrollTop > 20 || document.documentElement.scrollTop > 0) {
-    //         $scope.topScroll = false;
-    //         console.log($scope.topScroll);
-    //     } else {
-    //         $scope.topScroll = true;
-    //     }
-    // }
-    // window.onscroll = function() {checkTop()};
-
-    $scope.topFunc = function() {
-        document.body.scrollTop = 0; // For Safari
-        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-    }
-
-    $scope.openModal = function(videoId, videoName) {
-        let url = `https://api.themoviedb.org/3/movie/${videoId}/videos?api_key=${$rootScope.API_KEY}&language=en-US`
-        $scope.video = [];
-        $scope.videoYTid = '';
-        $http({
-            method: 'GET',
-            url: url
-        }).then(function successCallback(response) {
-            $scope.video = response.data.results;
-            if($scope.video[0] === undefined) {
-                $.sweetModal({
-                    content: 'Video cannot be found',
-                    width: '100%',
-                    icon: $.sweetModal.ICON_WARNING,
-                    theme: $.sweetModal.THEME_DARK
-                });
-            } else {
-                let videoYTid = $scope.video[0].key;
-                var embedUrl = `https://www.youtube.com/embed/${videoYTid}?autoplay=1`;
-                var trustUrl = $sce.trustAsResourceUrl(embedUrl);
-                $.sweetModal({
-                    title: videoName,
-                    width: '100%',
-                    content: `<iframe width="100%" height="500" src="${trustUrl}" title="${videoName}" frameborder="0" allowfullscreen></iframe>
-                    `,
-                    theme: $.sweetModal.THEME_DARK
-                });
-            }
-        }, function errorCallback(error) {
-            if(error.status == 404) {
-                $.sweetModal({
-                    content: 'Video cannot be found',
-                    width: '100%',
-                    icon: $.sweetModal.ICON_WARNING,
-                    theme: $.sweetModal.THEME_DARK
-                });
-            }
-        })
     }
 
 })

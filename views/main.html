@@ -63,7 +63,7 @@
                     <img src="./images/m-2.jpg" alt="">
                 </div>
                 <div class="latest-box-text">
-                    <strong>Kin 2018</strong>
+                    <strong>Peninsula</strong>
                     <p>Action Movies</p>
                 </div>
             </div>
@@ -74,7 +74,7 @@
                     <img src="./images/m-3.jpg" alt="">
                 </div>
                 <div class="latest-box-text">
-                    <strong>Kin 2018</strong>
+                    <strong>Inception</strong>
                     <p>Action Movies</p>
                 </div>
             </div>
@@ -85,7 +85,7 @@
                     <img src="./images/m-4.jpg" alt="">
                 </div>
                 <div class="latest-box-text">
-                    <strong>Kin 2018</strong>
+                    <strong>Iron Man 3</strong>
                     <p>Action Movies</p>
                 </div>
             </div>
@@ -96,7 +96,7 @@
                     <img src="./images/m-5.jpg" alt="">
                 </div>
                 <div class="latest-box-text">
-                    <strong>Kin 2018</strong>
+                    <strong>Venom</strong>
                     <p>Action Movies</p>
                 </div>
             </div>
@@ -107,7 +107,7 @@
                     <img src="./images/m-6.jpg" alt="">
                 </div>
                 <div class="latest-box-text">
-                    <strong>Kin 2018</strong>
+                    <strong>Aquaman</strong>
                     <p>Action Movies</p>
                 </div>
             </div>
@@ -118,7 +118,7 @@
                     <img src="./images/m-7.jpeg" alt="">
                 </div>
                 <div class="latest-box-text">
-                    <strong>Kin 2018</strong>
+                    <strong>Jungle Cruise</strong>
                     <p>Action Movies</p>
                 </div>
             </div>
@@ -126,10 +126,10 @@
         <li class="item-a">
             <div class="latest-box">
                 <div class="latest-box-img">
-                    <img src="./images/m-7.jpeg" alt="">
+                    <img src="./images/m-8.jpg" alt="">
                 </div>
                 <div class="latest-box-text">
-                    <strong>Kin 2018</strong>
+                    <strong>The Wrestler</strong>
                     <p>Action Movies</p>
                 </div>
             </div>
@@ -137,10 +137,10 @@
         <li class="item-a">
             <div class="latest-box">
                 <div class="latest-box-img">
-                    <img src="./images/m-7.jpeg" alt="">
+                    <img src="./images/m-9.jpeg" alt="">
                 </div>
                 <div class="latest-box-text">
-                    <strong>Kin 2018</strong>
+                    <strong>Fast and Furious 9</strong>
                     <p>Action Movies</p>
                 </div>
             </div>
@@ -263,7 +263,7 @@
         <div class="movies-details-box">
             <a href="">
                 <!-- Some of the data doesnt have the name or original_title so this will fix it -->
-                {{m.name || m.original_title}}
+                {{m.title || m.original_name}}
             </a>
             <div class="movies-details">
                 <p>Vote: {{m.vote_average}}</p>
@@ -271,11 +271,15 @@
                 <p>Language: <span class="capitalize">{{m.english_name}}</span></p>
             </div>
             <div class="movies-btns">
-                <a ng-click="openModal(m.id, m.name || m.original_title)">Watch Trailer</a>
+                <a ng-click="openModal(m.id, m.title || m.original_name)">Watch Trailer</a>
             </div>
         </div>
     </div>
     
+    <div ng-show="!moviesArr.length">
+        <img src="../images/notfound.png" alt="">
+    </div>
+
 </section>
 
 <!-- buttons  -->
