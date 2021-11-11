@@ -36,7 +36,7 @@ app.controller("mainCtrl", function ($scope, $http, $rootScope, $filter, $sce) {
         for(let i=0; i<array.length; i++) {
             result.push({
                 ...array[i], 
-                ...(mergedArray.find((itm) => itm.original_language === array[i].iso_639_1))
+                ...(mergedArray.find((itm) => itm.iso_639_1 === array[i].original_language))
             });
         }
         return result;

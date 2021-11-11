@@ -26,13 +26,16 @@ app.controller("moviesCtrl", function ($scope, $http, $rootScope, $filter, $sce)
     getMovies();
     //Hàm merge 2 array object dựa theo 2 key khác nhau có cùng value 
     function merged(array, mergedArray) {
+        console.log(array);
+        console.log(mergedArray);
         let result = [];
         for(let i=0; i<array.length; i++) {
             result.push({
                 ...array[i], 
-                ...(mergedArray.find((itm) => itm.original_language === array[i].iso_639_1))
+                ...(mergedArray.find((itm) => itm.iso_639_1 === array[i].original_language))
             });
         }
+        console.log(result);
         return result;
     }
     
